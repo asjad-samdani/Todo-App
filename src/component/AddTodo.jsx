@@ -1,38 +1,34 @@
-import React from "react";
-import { useState } from "react";
+import React, { useRef } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 
 function AddTodo({ onNewItem }) {
-  const [todoName, setTodoName] = useState();
-  const [todoDate, setTodoDate] = useState();
+  const todoNameElement = useRef();
+  const dueDateElement = useRef();
 
-  const handleTodoName = (e) => {
-    setTodoName(e.target.value);
-  };
-  const handleTodoDate = (e) => {
-    setTodoDate(e.target.value);
-  };
-  const handleAddButtonClicked = () => {
-    onNewItem(todoName, todoDate);
-    setTodoName("");
-    setTodoDate("");
+  const handleAddButtonClicked = (e) => {
+    e.preventDefault();
+    const todoName = todoNameElement.current.value;
+    const dueDate = dueDateElement.current.value;
+    todoNameElement.current.value = "";
+    dueDateElement.current.value = "";
+    onNewItem(todoName, dueDate);
   };
 
   return (
     <div className="container text-center input-container">
-      <div className="row">
+      <form className="row" onSubmit={handleAddButtonClicked}>
         <div className="col-6">
           <input
             type="text"
-            value={todoName}
             placeholder="Enter Todo here"
-            onChange={handleTodoName}
+            ref={todoNameElement}
           />
         </div>
 
         <div className="col-4">
-          <input type="date" value={todoDate} onChange={handleTodoDate} />
+          <input type="date" ref={dueDateElement} />
         </div>
+
         <div className="col-2">
           <button
             type="button"
@@ -42,7 +38,7 @@ function AddTodo({ onNewItem }) {
             <IoMdAddCircle />
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
