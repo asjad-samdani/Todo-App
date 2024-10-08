@@ -1,5 +1,5 @@
 import React from "react";
-import Todoitem from "./Todoitem";
+import Todoitem from "./TodoItem.jsx";
 
 function TodoItems({ todoItem, onDeleteClick }) {
   return (
