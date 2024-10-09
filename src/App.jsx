@@ -12,6 +12,7 @@ function App() {
     const newTodoItems = [...todoItems, { name: itemName, dueDate: ItemDate }];
     setTodoItems(newTodoItems);
   };
+
   const handleOnDelete = (todoItemName) => {
     const newTodoItem = todoItems.filter((item) => item.name != todoItemName);
     setTodoItems(newTodoItem);
